@@ -2,16 +2,16 @@
 
 #include <geometry/Convex.h>
 
-class Triangle : public Convex
+class Polygon : public Convex
 {
 public:
 
-    // TODO: template for float or double?
-    Triangle(vec2f point1, vec2f point2, vec2f point3)
+    Polygon(vec2f point1, vec2f point2, vec2f point3, vec2f point4)
     {
+
     }
 
-    ~Triangle() {}
+    ~Polygon() {}
 
     //
     // Convex implementation
@@ -21,4 +21,8 @@ public:
     {
         return vec2f();
     }
+
+private:
+
 };
+

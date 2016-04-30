@@ -1,6 +1,6 @@
 #pragma once
 
-#include <geometry/Triangle.h>
+#include <geometry/Convex.h>
 #include <math/Transform2.h>
 
 class GJKCollisionDetector
@@ -15,7 +15,7 @@ public:
     //!
     //!
     //!
-    bool detect(Triangle triangle1, Transform2f transform1, Triangle triangle2, Transform2f transform2);
+    bool detect(const Convex& convex1, const Transform2f& transform1, const Convex& convex2, const Transform2f& transform2);
 
 private:
 
