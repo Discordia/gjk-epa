@@ -5,7 +5,8 @@
 #include <glm/geometric.hpp>
 #include <geometry/Circle.h>
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 int main()
 {
@@ -47,6 +48,10 @@ int main()
     // Detect collision between rectangle and circle, should be a collision
     bool collisionRC = collisionDetector.detect(*rectangle, rectangleTransform, *circle, circleTransform);
     cout << "Do we have a collision between rectangle and circle: " << collisionRC << endl;
+
+    // Detect collision between triangle and circle, should *not* be a collision
+    bool collisionTC = collisionDetector.detect(*triangle, triangleTransform, *circle, circleTransform);
+    cout << "Do we have a collision between triangle and circle: " << collisionTC << endl;
 
     return 0;
 }
