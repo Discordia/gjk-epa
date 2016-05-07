@@ -2,7 +2,10 @@ Prototype C++ implementation of GJK and EAP algorithms for 2D collision detectio
 
 Basically a direct (but a biut simplified) port of GJK and EAP in dyn4j. See: https://github.com/wnbittle/dyn4j and dyn4j.org.
 
-*Work In Progress!* Nothing is really working as of this moment!!!
+*Work In Progress!* It is starting to work, not very well tested though. 
+
+I have done some successful tests with collision detection between triangle, rectangle, polygon and circle. 
+BUG: There are cases when the algorithm just hangs, i.e. iterates for ever.
 
 Dependencies
 =========================================
