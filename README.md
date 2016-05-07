@@ -1,6 +1,6 @@
 Prototype C++ implementation of GJK and EAP algorithms for 2D collision detection
 
-Basically a direct (but a bit simplified) port of GJK and EAP in dyn4j. See: https://github.com/wnbittle/dyn4j and dyn4j.org.
+Basically a direct (but a bit simplified) port of GJK and EAP in dyn4j. See: https://github.com/wnbittle/dyn4j and http://www.dyn4j.org.
 
 *Work In Progress!* It is starting to work, not very well tested though. 
 
@@ -14,9 +14,9 @@ GLM for vector and matrix math, see: http://glm.g-truc.net/0.9.7/index.html
 
 Build
 =========================================
-git submodules init
-giut submodules update
-mkdir build
-cd build/
-cmake ..
+git submodules init </br>
+giut submodules update </br>
+mkdir build </br>
+cd build/ </br>
+cmake .. </br>
 make -j8
