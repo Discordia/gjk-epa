@@ -5,6 +5,7 @@ Basically a direct (but a biut simplified) port of GJK and EAP in dyn4j. See: ht
 *Work In Progress!* It is starting to work, not very well tested though. 
 
 I have done some successful tests with collision detection between triangle, rectangle, polygon and circle. 
+
 BUG: There are cases when the algorithm just hangs, i.e. iterates for ever.
 
 Dependencies
