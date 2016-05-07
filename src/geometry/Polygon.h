@@ -27,7 +27,7 @@ public:
     //!
     //!
     //!
-    static unique_ptr<Polygon> createRectangle(dvec2 point1, dvec2 point2, dvec2 point3, dvec2 point4);
+    static unique_ptr<Polygon> createPolygon(std::initializer_list<dvec2> points);
 
     //!
     //!

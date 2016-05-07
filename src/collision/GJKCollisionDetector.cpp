@@ -14,7 +14,7 @@ bool GJKCollisionDetector::detect(
 {
     // TODO: If is circle - circle, use faster method of collision detection
 
-    vector<dvec2> simplex(3);
+    vector<dvec2> simplex;
     MinkowskiSum minkowskiSum(convex1, transform1, convex2, transform2);
     dvec2 direction = calcInitialDirection(convex1, transform1, convex2, transform2);
 

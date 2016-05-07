@@ -17,9 +17,9 @@ unique_ptr<Polygon> Polygon::createTriangle(dvec2 point1, dvec2 point2, dvec2 po
     return unique_ptr<Polygon>(new Polygon({point1, point2, point3}));
 }
 
-unique_ptr<Polygon> Polygon::createRectangle(dvec2 point1, dvec2 point2, dvec2 point3, dvec2 point4)
+unique_ptr<Polygon> Polygon::createPolygon(std::initializer_list<dvec2> points)
 {
-    return unique_ptr<Polygon>(new Polygon({point1, point2, point3, point4}));
+    return unique_ptr<Polygon>(new Polygon(points));
 }
 
 const dvec2& Polygon::getCenter() const
