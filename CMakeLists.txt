@@ -3,7 +3,15 @@ project(gjk_eap)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-include_directories(src)
+
+#
+# Dependencies
+#
+add_subdirectory(deps/glm)
+
+include_directories(
+        src
+        deps/glm)
 
 file(GLOB SOURCE_FILES
         src/collision/*

@@ -15,7 +15,7 @@ public:
     //!
     //!
     //!
-    bool detect(const Convex& convex1, const Transform2f& transform1, const Convex& convex2, const Transform2f& transform2);
+    bool detect(const Convex& convex1, const Transform2& transform1, const Convex& convex2, const Transform2& transform2);
 
 private:
 

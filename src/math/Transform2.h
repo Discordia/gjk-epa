@@ -1,9 +1,11 @@
 #pragma once
 
-#include <math/Vector2.h>
-#include <math/Matrix22.h>
+#include <glm/vec2.hpp>
+#include <glm/mat2x2.hpp>
 
-template<typename T>
+using glm::dvec2;
+using glm::dmat2x2;
+
 class Transform2
 {
 public:
@@ -12,22 +14,22 @@ public:
     //!
     //!
     Transform2()
-            : translation(0, 0), scaleV(1, 1)
+        : translation(0, 0), scaleV(1, 1)
     {
     }
 
     //!
     //!
     //!
-    Transform2(Vector2 <T> position)
-            : translation(position), scaleV(1, 1)
+    Transform2(dvec2 position)
+        : translation(position), scaleV(1, 1)
     {
     }
 
     //!
     //!
     //!
-    const Vector2 <T>& getTranslation() const
+    const dvec2& getTranslation() const
     {
         return translation;
     }
@@ -35,7 +37,7 @@ public:
     //!
     //!
     //!
-    void setTranslation(const T x, const T y)
+    void setTranslation(const double x, const double y)
     {
         translation.x = x;
         translation.y = y;
@@ -44,7 +46,7 @@ public:
     //!
     //!
     //!
-    void setTranslation(const vec2f t)
+    void setTranslation(const dvec2 t)
     {
         translation.x = t.x;
         translation.y = t.y;
@@ -53,7 +55,7 @@ public:
     //!
     //!
     //!
-    Matrix22 <T> getRotation() const
+    const dmat2x2& getRotation() const
     {
         return rotation;
     }
@@ -61,7 +63,7 @@ public:
     //!
     //!
     //!
-    void translate(vec2f vector)
+    void translate(dvec2 vector)
     {
         translation += vector;
     }
@@ -69,31 +71,32 @@ public:
     //!
     //!
     //!
-    void translate(T x, T y)
+    void translate(double x, double y)
     {
-        translate(vec2f(x, y));
+        translate(dvec2(x, y));
     }
 
     //!
     //!
     //!
-    void scale(T x, T y)
+    void scale(double x, double y)
     {
-        scale(vec2f(x, y));
+        scale(dvec2(x, y));
     }
 
     //!
     //!
     //!
-    void scale(vec2f o)
+    void scale(dvec2 o)
     {
         scaleV = o;
     }
+/*
 
     //!
     //! Rotate the rotation matrix to an absolute angle
     //!
-    void rotateR(T angle)
+    void rotateR(double angle)
     {
         rotate(rotation, angle);
     }
@@ -101,12 +104,12 @@ public:
     //!
     //!
     //!
-    vec2f getTransformed(vec2f vector) const
+    dvec2 getTransformed(dvec2 vector) const
     {
-        vec2f tv;
+        dvec2 tv;
 
-        T x = vector.x;
-        T y = vector.y;
+        double x = vector.x;
+        double y = vector.y;
 
         tv.x = rotation.m22[0][0] * x + rotation.m22[0][1] * y + translation.x;
         tv.y = rotation.m22[1][0] * x + rotation.m22[1][1] * y + translation.y;
@@ -117,9 +120,9 @@ public:
     //!
     //!
     //!
-    vec2f getTransformedR(vec2f vector) const
+    dvec2 getTransformedR(dvec2 vector) const
     {
-        vec2f tv;
+        dvec2 tv;
 
         tv.x = rotation.m22[0][0] * vector.x + rotation.m22[0][1] * vector.y;
         tv.y = rotation.m22[1][0] * vector.x + rotation.m22[1][1] * vector.y;
@@ -130,7 +133,7 @@ public:
     //!
     //!
     //!
-    void toArray(T* m16) const
+    void toArray(double* m16) const
     {
         m16[0] = scaleV.x * rotation.m22[0][0];
         m16[1] = rotation.m22[0][1];
@@ -148,19 +151,16 @@ public:
         m16[13] = translation.y;
         m16[14] = 0;
         m16[15] = 1;
-    }
+    } */
 
 private:
 
     //!
-    Vector2 <T> translation;
+    glm::dvec2 translation;
 
     //!
-    Vector2 <T> scaleV;
+    glm::dvec2 scaleV;
 
     //!
-    Matrix22 <T> rotation;
+    glm::dmat2x2 rotation;
 };
-
-typedef Transform2<float> Transform2f;
-typedef Transform2<double> Transform2d;

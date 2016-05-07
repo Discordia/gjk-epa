@@ -1,7 +1,8 @@
 #pragma once
 
-#include <math/Vector2.h>
+#include <glm/vec2.hpp>
 
+using glm::dvec2;
 
 class Convex
 {
@@ -20,7 +21,7 @@ public:
     //!
     //!
     //!
-    virtual vec2f getCenter() = 0;
+    virtual dvec2 getCenter() = 0;
 
 
 private:
