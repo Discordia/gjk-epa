@@ -44,6 +44,11 @@ private:
     //!
     //!
     //!
+    bool valid() const;
+
+    //!
+    //!
+    //!
     dvec2 calcAreaWeightedCenter(const vector<dvec2>& points);
 
 private:
@@ -53,5 +58,6 @@ private:
 
     //!
     dvec2 center;
+
 };
 

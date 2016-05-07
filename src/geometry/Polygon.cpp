@@ -1,5 +1,8 @@
 #include <geometry/Polygon.h>
+#include <math/Vector2Util.h>
 #include <glm/geometric.hpp>
+#include <cassert>
+#include <cmath>
 
 using glm::cross;
 using glm::dot;
@@ -9,6 +12,9 @@ const double INV_3 = 1.0 / 3.0;
 Polygon::Polygon(std::initializer_list<dvec2> points)
 {
     vertices.insert(vertices.end(), points.begin(), points.end());
+
+    assert(valid());
+
     center = calcAreaWeightedCenter(vertices);
 }
 
@@ -133,3 +139,49 @@ dvec2 Polygon::calcAreaWeightedCenter(const vector<dvec2>& points)
     // return the center
     return center;
 }
+
+bool Polygon::valid() const
+{
+    size_t size = vertices.size();
+    if (size < 3)
+    {
+        return false;
+    }
+
+    // check for convex
+    double area = 0.0;
+    double sign = 0.0;
+    for (int i = 0; i < size; i++)
+    {
+        dvec2 p0 = (i - 1 < 0) ? vertices[size - 1] : vertices[i - 1];
+        dvec2 p1 = vertices[i];
+        dvec2 p2 = (i + 1 == size) ? vertices[0] : vertices[i + 1];
+
+        // check for coincident vertices
+        if (p1 == p2)
+        {
+            return false;
+        }
+
+        // check the cross product for CCW winding
+        double cross = Vector2Util::cross(p1 - p0, p2 - p1);
+        double tsign = glm::sign(cross);
+        area += cross;
+
+        // check for co-linear points (for now its allowed)
+        if (abs(cross) > std::numeric_limits<double>::epsilon())
+        {
+            // check for convexity
+            if (sign != 0.0 && tsign != sign)
+            {
+                return false;
+            }
+        }
+
+        sign = tsign;
+    }
+
+    // check for CCW
+    return area >= 0.0;
+}
+

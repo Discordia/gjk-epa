@@ -10,6 +10,11 @@ class Vector2Util
 {
 public:
 
+    static double cross(const dvec2& p1, const dvec2& p2)
+    {
+        return p1.x * p2.y - p1.y * p2.x;
+    }
+
     //!
     //! Computes:
     //! b * (a . c) - a * (b . c)
