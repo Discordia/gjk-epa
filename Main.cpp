@@ -12,19 +12,31 @@ int main()
             dvec2(4.0f, 11.0f),
             dvec2(4.0f, 5.0f),
             dvec2(9.0f, 9.0f));
-    Transform2 transform1;
+    Transform2 triangleTransform;
 
     unique_ptr<Polygon> polygon = Polygon::createPolygon({
             dvec2(5.0f, 7.0f),
             dvec2(7.0f, 3.0f),
             dvec2(10.0f, 2.0f),
             dvec2(12.0f, 7.0f)});
-    Transform2 transform2;
+    Transform2 polygonTransform;
+
+    unique_ptr<Polygon> rectangle = Polygon::createRectangle(10.0, 12.0);
+    Transform2 rectangleTransform;
 
     GJKCollisionDetector collisionDetector;
-    bool collision = collisionDetector.detect(*triangle, transform1, *polygon, transform2);
 
-    cout << "Do we have a collision: " << collision << endl;
+    // Detect collision between triangle and polygon, should be a collision
+    bool collisionTP = collisionDetector.detect(*triangle, triangleTransform, *polygon, polygonTransform);
+    cout << "Do we have a collision between triangle and polygon: " << collisionTP << endl;
+
+    // Detect collision between polygon and rectangle, should not be a collision
+    bool collisionPR = collisionDetector.detect(*polygon, polygonTransform, *rectangle, rectangleTransform);
+    cout << "Do we have a collision between polygon and rectangle: " << collisionPR << endl;
+
+    // Detect collision between triangle and rectangle, should be a collision
+    bool collisionTR = collisionDetector.detect(*triangle, triangleTransform, *rectangle, rectangleTransform);
+    cout << "Do we have a collision between triangle and rectangle: " << collisionTR << endl;
 
     return 0;
 }

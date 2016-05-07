@@ -22,12 +22,17 @@ public:
     //!
     //!
     //!
-    static unique_ptr<Polygon> createTriangle(dvec2 point1, dvec2 point2, dvec2 point3);
+    static unique_ptr<Polygon> createPolygon(std::initializer_list<dvec2> points);
 
     //!
     //!
     //!
-    static unique_ptr<Polygon> createPolygon(std::initializer_list<dvec2> points);
+    static unique_ptr<Polygon> createTriangle(dvec2 point1, dvec2 point2, dvec2 point3);
+
+    //!
+    //! Constructs a Rectangle with width and height centered around origin
+    //!
+    static unique_ptr<Polygon> createRectangle(double width, double height);
 
     //!
     //!

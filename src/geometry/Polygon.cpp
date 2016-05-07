@@ -18,14 +18,26 @@ Polygon::Polygon(std::initializer_list<dvec2> points)
     center = calcAreaWeightedCenter(vertices);
 }
 
+unique_ptr<Polygon> Polygon::createPolygon(std::initializer_list<dvec2> points)
+{
+    return unique_ptr<Polygon>(new Polygon(points));
+}
+
 unique_ptr<Polygon> Polygon::createTriangle(dvec2 point1, dvec2 point2, dvec2 point3)
 {
     return unique_ptr<Polygon>(new Polygon({point1, point2, point3}));
 }
 
-unique_ptr<Polygon> Polygon::createPolygon(std::initializer_list<dvec2> points)
+unique_ptr<Polygon> Polygon::createRectangle(double width, double height)
 {
-    return unique_ptr<Polygon>(new Polygon(points));
+    assert(width > 0.0 && height > 0.0);
+
+    dvec2 point1(-width * 0.5, -height *0.5);
+    dvec2 point2(width * 0.5,  -height *0.5);
+    dvec2 point3(width * 0.5,   height *0.5);
+    dvec2 point4(-width * 0.5,  height *0.5);
+
+    return unique_ptr<Polygon>(new Polygon({point1, point2, point3, point4}));
 }
 
 const dvec2& Polygon::getCenter() const
@@ -184,4 +196,6 @@ bool Polygon::valid() const
     // check for CCW
     return area >= 0.0;
 }
+
+
 
