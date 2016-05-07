@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include <geometry/Polygon.h>
-#include <math/Transform2.h>
 #include <collision/GJKCollisionDetector.h>
+#include <glm/geometric.hpp>
 
 using namespace std;
 
