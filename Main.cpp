@@ -1,9 +1,8 @@
 #include <iostream>
 
-#include <geometry/Polygon.h>
 #include <collision/GJKCollisionDetector.h>
-#include <glm/geometric.hpp>
 #include <geometry/Circle.h>
+#include <geometry/Polygon.h>
 
 using std::cout;
 using std::endl;
