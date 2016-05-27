@@ -25,9 +25,8 @@ int main()
     unique_ptr<Polygon> rectangle = Polygon::createRectangle(10.0, 12.0);
     Transform2 rectangleTransform;
 
-    unique_ptr<Circle> circle = Circle::create(2.0f);
+    unique_ptr<Circle> circle = Circle::create(2.0);
     Transform2 circleTransform;
-    circleTransform.translate(6.0, 0.0);
 
 
     GJKCollisionDetector collisionDetector;

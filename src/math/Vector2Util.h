@@ -2,9 +2,11 @@
 
 #include <glm/vec2.hpp>
 #include <glm/geometric.hpp>
+#include <cmath>
 
 using glm::dvec2;
 using glm::dot;
+using std::abs;
 
 class Vector2Util
 {
@@ -40,8 +42,14 @@ public:
     }
 
     //! Returns the right-handed normal of this vector.
-    dvec2 right(const dvec2& v)
+    static dvec2 right(const dvec2& v)
     {
         return dvec2(-v.y, v.x);
+    }
+
+    static bool isZero(const dvec2& v)
+    {
+        return abs(v.x) <= std::numeric_limits<double>::epsilon()
+               && abs(v.y) <= std::numeric_limits<double>::epsilon();
     }
 };

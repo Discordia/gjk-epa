@@ -2,6 +2,8 @@
 #include <collision/MinkowskiSum.h>
 #include <math/Vector2Util.h>
 
+using namespace std;
+
 GJKCollisionDetector::GJKCollisionDetector()
 {
 }
@@ -36,7 +38,7 @@ dvec2 GJKCollisionDetector::calcInitialDirection(
 bool GJKCollisionDetector::detect(const MinkowskiSum& minkowskiSum, vector<dvec2>& simplex, dvec2& direction)
 {
     // check for a zero direction vector
-    if (direction.length() <= std::numeric_limits<double>::epsilon())
+    if (Vector2Util::isZero(direction))
     {
         direction = dvec2(1.0, 0.0);
     }
@@ -95,7 +97,7 @@ bool GJKCollisionDetector::checkSimplex(vector<dvec2>& simplex, dvec2& direction
 
         // get the edges
         dvec2 ab = b - a;
-        dvec2 ac = a - c;
+        dvec2 ac = c - a;
 
         // get the edge normals
         dvec2 abPerp = Vector2Util::tripleProduct(ac, ab, ab);
