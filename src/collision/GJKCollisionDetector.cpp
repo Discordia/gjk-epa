@@ -6,6 +6,7 @@ using namespace std;
 
 GJKCollisionDetector::GJKCollisionDetector()
 {
+    penetrationSolver = unique_ptr<EPAMinkowskiPenetrationSolver>(new EPAMinkowskiPenetrationSolver);
 }
 
 bool GJKCollisionDetector::detect(
@@ -21,6 +22,24 @@ bool GJKCollisionDetector::detect(
     dvec2 direction = calcInitialDirection(convex1, transform1, convex2, transform2);
 
     return detect(minkowskiSum, simplex, direction);
+}
+
+bool GJKCollisionDetector::detect(const Convex& convex1, const Transform2& transform1, const Convex& convex2,
+                                  const Transform2& transform2, Penetration& penetration)
+{
+    // TODO: If is circle - circle, use faster method of collision detection
+
+    vector<dvec2> simplex;
+    MinkowskiSum minkowskiSum(convex1, transform1, convex2, transform2);
+    dvec2 direction = calcInitialDirection(convex1, transform1, convex2, transform2);
+
+    if (detect(minkowskiSum, simplex, direction))
+    {
+        penetrationSolver->findPenetration(simplex, minkowskiSum, penetration);
+        return true;
+    }
+
+    return false;
 }
 
 dvec2 GJKCollisionDetector::calcInitialDirection(
@@ -159,6 +178,8 @@ bool GJKCollisionDetector::checkSimplex(vector<dvec2>& simplex, dvec2& direction
 
     return false;
 }
+
+
 
 
 

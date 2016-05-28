@@ -1,10 +1,15 @@
 #pragma once
 
-#include <geometry/Convex.h>
-#include <math/Transform2.h>
+#include <memory>
 #include <vector>
 
+#include <collision/Penetration.h>
+#include <collision/EPAMinkowskiPenetrationSolver.h>
+#include <geometry/Convex.h>
+#include <math/Transform2.h>
+
 using std::vector;
+using std::unique_ptr;
 
 class MinkowskiSum;
 
@@ -21,6 +26,11 @@ public:
     //!
     //!
     bool detect(const Convex& convex1, const Transform2& transform1, const Convex& convex2, const Transform2& transform2);
+
+    //!
+    //!
+    //!
+    bool detect(const Convex& convex1, const Transform2& transform1, const Convex& convex2, const Transform2& transform2, Penetration& penetration);
 
 private:
 
@@ -49,6 +59,7 @@ private:
 
 private:
 
-
+    //!
+    unique_ptr<EPAMinkowskiPenetrationSolver> penetrationSolver;
 };
 
