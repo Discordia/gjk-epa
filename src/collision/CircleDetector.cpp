@@ -4,7 +4,6 @@
 
 #include <collision/CircleDetector.h>
 #include <math/Vector2Util.h>
-#include <glm/geometric.hpp>
 
 bool CircleDetector::detect(
         const Circle& circle1,
