@@ -5,7 +5,7 @@
 
 using std::unique_ptr;
 
-const int MAX_ITERATIONS = 100;
+const int MAX_ITERATIONS = 10;
 
 const double DISTANCE_EPSILON = sqrt(std::numeric_limits<double>::epsilon());
 
