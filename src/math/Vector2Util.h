@@ -30,9 +30,14 @@ public:
     //! Magnitude squared:
     //! v.x * v.x + v.y * v.y
     //!
-    static double magnitudeSquared(const dvec2& a)
+    static double magnitudeSquared(const dvec2& v)
     {
-        return a.x * a.x + a.y * a.y;
+        return v.x * v.x + v.y * v.y;
+    }
+
+    static double magnitude(const dvec2& v)
+    {
+        return sqrt(v.x * v.x + v.y * v.y);
     }
 
     //! Returns the left-handed normal of this vector.

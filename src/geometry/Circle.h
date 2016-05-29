@@ -27,6 +27,11 @@ public:
     //!
     //!
     //!
+    const double getRadius() const;
+
+    //!
+    //!
+    //!
     const dvec2 getFarthestPoint(const dvec2 direction, const Transform2& transform) const;
 
 private:

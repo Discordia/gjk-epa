@@ -21,6 +21,11 @@ const dvec2& Circle::getCenter() const
     return center;
 }
 
+const double Circle::getRadius() const
+{
+    return radius;
+}
+
 const dvec2 Circle::getFarthestPoint(const dvec2 direction, const Transform2& transform) const
 {
     dvec2 nAxis = normalize(direction);
