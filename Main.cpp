@@ -43,12 +43,18 @@ int main()
     cout << "Do we have a collision between polygon and rectangle: " << collisionPR << endl;
 
     // Detect collision between triangle and rectangle, should be a collision
-    bool collisionTR = collisionDetector.detect(*triangle, triangleTransform, *rectangle, rectangleTransform);
-    cout << "Do we have a collision between triangle and rectangle: " << collisionTR << endl;
+    Penetration penetrationTR;
+    bool collisionTR = collisionDetector.detect(*triangle, triangleTransform, *rectangle, rectangleTransform, penetrationTR);
+    cout << "Do we have a collision between triangle and rectangle: " << collisionTR;
+    cout << ", penetration normal: (" << penetrationTR.normal.x << "," << penetrationTR.normal.y << ")";
+    cout << ", penetration depth: " << penetrationTR.depth << endl;
 
     // Detect collision between rectangle and circle, should be a collision
-    bool collisionRC = collisionDetector.detect(*rectangle, rectangleTransform, *circle, circleTransform);
-    cout << "Do we have a collision between rectangle and circle: " << collisionRC << endl;
+    Penetration penetrationRC;
+    bool collisionRC = collisionDetector.detect(*rectangle, rectangleTransform, *circle, circleTransform, penetrationRC);
+    cout << "Do we have a collision between rectangle and circle: " << collisionRC;
+    cout << ", penetration normal: (" << penetrationRC.normal.x << "," << penetrationRC.normal.y << ")";
+    cout << ", penetration depth: " << penetrationRC.depth << endl;
 
     // Detect collision between triangle and circle, should *not* be a collision
     bool collisionTC = collisionDetector.detect(*triangle, triangleTransform, *circle, circleTransform);
