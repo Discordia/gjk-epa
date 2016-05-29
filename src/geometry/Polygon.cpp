@@ -133,7 +133,7 @@ dvec2 Polygon::calcAreaWeightedCenter(const vector<dvec2>& points)
         // (p1 + p2) * (D / 3)
         // = (x1 + x2) * (yi * x(i+1) - y(i+1) * xi) / 3
         // we will divide by the total area later
-        center += p1 + p2 * INV_3 * triangleArea;
+        center += (p1 + p2) * INV_3 * triangleArea;
     }
 
     // check for zero area

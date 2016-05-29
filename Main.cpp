@@ -32,8 +32,11 @@ int main()
     GJKCollisionDetector collisionDetector;
 
     // Detect collision between triangle and polygon, should be a collision
-    bool collisionTP = collisionDetector.detect(*triangle, triangleTransform, *polygon, polygonTransform);
-    cout << "Do we have a collision between triangle and polygon: " << collisionTP << endl;
+    Penetration penetration;
+    bool collisionTP = collisionDetector.detect(*triangle, triangleTransform, *polygon, polygonTransform, penetration);
+    cout << "Do we have a collision between triangle and polygon: " << collisionTP;
+    cout << ", penetration normal: (" << penetration.normal.x << "," << penetration.normal.y << ")";
+    cout << ", penetration depth: " << penetration.depth << endl;
 
     // Detect collision between polygon and rectangle, should *not* be a collision
     bool collisionPR = collisionDetector.detect(*polygon, polygonTransform, *rectangle, rectangleTransform);

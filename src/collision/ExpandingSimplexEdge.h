@@ -69,6 +69,6 @@ struct DistancePredicate
 {
     bool operator()(const shared_ptr<ExpandingSimplexEdge>& lhs, const shared_ptr<ExpandingSimplexEdge>& rhs) const
     {
-        return lhs->getDistance() < rhs->getDistance();
+        return lhs->getDistance() > rhs->getDistance();
     }
 };
