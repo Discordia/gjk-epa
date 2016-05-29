@@ -9,7 +9,8 @@ using glm::dot;
 
 const double INV_3 = 1.0 / 3.0;
 
-Polygon::Polygon(std::initializer_list<dvec2> points)
+Polygon::Polygon(const ConvexType convextType, std::initializer_list<dvec2> points)
+    : Convex(convextType)
 {
     vertices.insert(vertices.end(), points.begin(), points.end());
 
@@ -20,12 +21,12 @@ Polygon::Polygon(std::initializer_list<dvec2> points)
 
 unique_ptr<Polygon> Polygon::createPolygon(std::initializer_list<dvec2> points)
 {
-    return unique_ptr<Polygon>(new Polygon(points));
+    return unique_ptr<Polygon>(new Polygon(ConvexType::POLYGON, points));
 }
 
 unique_ptr<Polygon> Polygon::createTriangle(dvec2 point1, dvec2 point2, dvec2 point3)
 {
-    return unique_ptr<Polygon>(new Polygon({point1, point2, point3}));
+    return unique_ptr<Polygon>(new Polygon(ConvexType::TRIANGLE, {point1, point2, point3}));
 }
 
 unique_ptr<Polygon> Polygon::createRectangle(double width, double height)
@@ -37,7 +38,7 @@ unique_ptr<Polygon> Polygon::createRectangle(double width, double height)
     dvec2 point3(width * 0.5,   height *0.5);
     dvec2 point4(-width * 0.5,  height *0.5);
 
-    return unique_ptr<Polygon>(new Polygon({point1, point2, point3, point4}));
+    return unique_ptr<Polygon>(new Polygon(ConvexType::RECTANGLE, {point1, point2, point3, point4}));
 }
 
 const dvec2& Polygon::getCenter() const

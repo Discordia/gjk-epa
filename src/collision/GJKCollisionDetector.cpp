@@ -1,6 +1,7 @@
 #include <collision/GJKCollisionDetector.h>
 #include <collision/MinkowskiSum.h>
 #include <math/Vector2Util.h>
+#include "CircleDetector.h"
 
 using namespace std;
 
@@ -15,7 +16,14 @@ bool GJKCollisionDetector::detect(
         const Convex& convex2,
         const Transform2& transform2)
 {
-    // TODO: If is circle - circle, use faster method of collision detection
+    if (convex1.getType() == ConvexType::CIRCLE && convex2.getType() == ConvexType::CIRCLE)
+    {
+        return CircleDetector::detect(
+                reinterpret_cast<const Circle&>(convex1),
+                transform1,
+                reinterpret_cast<const Circle&>(convex2),
+                transform2);
+    }
 
     vector<dvec2> simplex;
     MinkowskiSum minkowskiSum(convex1, transform1, convex2, transform2);
@@ -27,7 +35,15 @@ bool GJKCollisionDetector::detect(
 bool GJKCollisionDetector::detect(const Convex& convex1, const Transform2& transform1, const Convex& convex2,
                                   const Transform2& transform2, Penetration& penetration)
 {
-    // TODO: If is circle - circle, use faster method of collision detection
+    if (convex1.getType() == ConvexType::CIRCLE && convex2.getType() == ConvexType::CIRCLE)
+    {
+        return CircleDetector::detect(
+                reinterpret_cast<const Circle&>(convex1),
+                transform1,
+                reinterpret_cast<const Circle&>(convex2),
+                transform2,
+                penetration);
+    }
 
     vector<dvec2> simplex;
     MinkowskiSum minkowskiSum(convex1, transform1, convex2, transform2);

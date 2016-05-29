@@ -17,7 +17,7 @@ public:
     //!
     //!
     //!
-    Polygon(std::initializer_list<dvec2> points);
+    Polygon(const ConvexType convexType, std::initializer_list<dvec2> points);
 
     //!
     //!

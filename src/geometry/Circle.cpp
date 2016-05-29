@@ -6,7 +6,7 @@
 using glm::normalize;
 
 Circle::Circle(double radius)
-    : radius(radius)
+    : Convex(ConvexType::CIRCLE), radius(radius)
 {
     assert(radius > 0.0);
 }

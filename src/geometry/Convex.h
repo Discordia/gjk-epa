@@ -5,6 +5,14 @@
 
 using glm::dvec2;
 
+enum ConvexType
+{
+    CIRCLE,
+    TRIANGLE,
+    RECTANGLE,
+    POLYGON
+};
+
 class Convex
 {
 public:
@@ -12,12 +20,19 @@ public:
     //!
     //!
     //!
-    Convex() {}
+    Convex(const ConvexType convexType)
+        : convexType(convexType)
+    {}
 
     //!
     //!
     //!
     virtual ~Convex() {}
+
+    //!
+    //!
+    //!
+    const ConvexType& getType() const { return convexType; }
 
     //!
     //!
@@ -32,5 +47,7 @@ public:
 
 private:
 
+    //!
+    const ConvexType convexType;
 };
 
