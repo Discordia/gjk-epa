@@ -35,11 +35,6 @@ public:
         return v.x * v.x + v.y * v.y;
     }
 
-    static double magnitude(const dvec2& v)
-    {
-        return sqrt(v.x * v.x + v.y * v.y);
-    }
-
     //! Returns the left-handed normal of this vector.
     static dvec2 left(const dvec2& v)
     {

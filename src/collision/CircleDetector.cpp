@@ -16,7 +16,7 @@ bool CircleDetector::detect(
 
     dvec2 v = ce2 - ce1;
     double radii = circle1.getRadius() + circle2.getRadius();
-    double mag = Vector2Util::magnitude(v);
+    double mag = glm::length(v);
 
     return mag < radii;
 }
@@ -33,7 +33,7 @@ bool CircleDetector::detect(
 
     dvec2 v = ce2 - ce1;
     double radii = circle1.getRadius() + circle2.getRadius();
-    double mag = Vector2Util::magnitude(v);
+    double mag = glm::length(v);
 
     if (mag < radii)
     {
