@@ -1,6 +1,6 @@
-C++ implementation of GJK and EAP algorithms for 2D collision detection
+C++ implementation of GJK and EPA algorithms for 2D collision detection
 
-Basically a direct (but a bit simplified) port of GJK and EAP in dyn4j. See: https://github.com/wnbittle/dyn4j and http://www.dyn4j.org.
+Basically a direct (but a bit simplified) port of GJK and EPA in dyn4j. See: https://github.com/wnbittle/dyn4j and http://www.dyn4j.org.
 
 Dependencies
 =========================================
