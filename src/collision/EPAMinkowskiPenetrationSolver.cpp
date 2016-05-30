@@ -2,12 +2,16 @@
 #include <collision/ExpandingSimplex.h>
 #include <collision/MinkowskiSum.h>
 #include <collision/Penetration.h>
+#include <math/Epsilon.h>
 
 using std::unique_ptr;
 
-const int MAX_ITERATIONS = 10;
+const int MAX_ITERATIONS = 100;
 
-const double DISTANCE_EPSILON = sqrt(std::numeric_limits<double>::epsilon());
+EPAMinkowskiPenetrationSolver::EPAMinkowskiPenetrationSolver()
+    : DISTANCE_EPSILON(sqrt(Epsilon::getEpsilon()))
+{
+}
 
 void EPAMinkowskiPenetrationSolver::findPenetration(
         const vector<dvec2>& simplex,

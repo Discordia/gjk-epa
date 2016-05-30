@@ -16,7 +16,15 @@ public:
     //!
     //!
     //!
+    EPAMinkowskiPenetrationSolver();
+
+    //!
+    //!
+    //!
     void findPenetration(const vector<dvec2>& simplex, const MinkowskiSum& minkowskiSum, Penetration& penetration) const;
 
 private:
+
+    //!
+    const double DISTANCE_EPSILON;
 };

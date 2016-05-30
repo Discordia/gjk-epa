@@ -1,7 +1,8 @@
 #include <collision/GJKCollisionDetector.h>
+#include <collision/CircleDetector.h>
 #include <collision/MinkowskiSum.h>
+#include <math/Epsilon.h>
 #include <math/Vector2Util.h>
-#include "CircleDetector.h"
 
 using namespace std;
 
@@ -186,7 +187,7 @@ bool GJKCollisionDetector::checkSimplex(vector<dvec2>& simplex, dvec2& direction
 
         // check for degenerate cases where the origin lies on the segment
         // created by a -> b which will yield a zero edge normal
-        if (Vector2Util::magnitudeSquared(direction) <= std::numeric_limits<double>::epsilon()) {
+        if (Vector2Util::magnitudeSquared(direction) <= Epsilon::getEpsilon()) {
             // in this case just choose either normal (left or right)
             direction = Vector2Util::left(ab);
         }
