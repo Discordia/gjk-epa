@@ -27,6 +27,8 @@ int main()
 
     unique_ptr<Circle> circle = Circle::create(2.0);
     Transform2 circleTransform;
+    Transform2 circleTransform2;
+    circleTransform2.translate(1.0, 1.2);
 
 
     GJKCollisionDetector collisionDetector;
@@ -59,6 +61,13 @@ int main()
     // Detect collision between triangle and circle, should *not* be a collision
     bool collisionTC = collisionDetector.detect(*triangle, triangleTransform, *circle, circleTransform);
     cout << "Do we have a collision between triangle and circle: " << collisionTC << endl;
+
+    // Detect collision between circle and circle, should be a collision
+    Penetration penetrationCC;
+    bool collisionCC = collisionDetector.detect(*circle, circleTransform, *circle, circleTransform2, penetrationCC);
+    cout << "Do we have a collision between circle and circle: " << collisionCC;
+    cout << ", penetration normal: (" << penetrationCC.normal.x << "," << penetrationCC.normal.y << ")";
+    cout << ", penetration depth: " << penetrationCC.depth << endl;
 
     return 0;
 }

@@ -37,7 +37,7 @@ bool CircleDetector::detect(
 
     if (mag < radii)
     {
-        penetration.normal = v;
+        penetration.normal = glm::normalize(v);
         penetration.depth = radii - mag;
 
         return true;
