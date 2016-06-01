@@ -7,9 +7,9 @@
 using glm::cross;
 using glm::dot;
 
-const double INV_3 = 1.0 / 3.0;
+const float INV_3 = 1.0 / 3.0;
 
-Polygon::Polygon(const ConvexType convextType, std::initializer_list<dvec2> points)
+Polygon::Polygon(const ConvexType convextType, std::initializer_list<fvec2> points)
     : Convex(convextType)
 {
     vertices.insert(vertices.end(), points.begin(), points.end());
@@ -19,53 +19,53 @@ Polygon::Polygon(const ConvexType convextType, std::initializer_list<dvec2> poin
     center = calcAreaWeightedCenter(vertices);
 }
 
-unique_ptr<Polygon> Polygon::createPolygon(std::initializer_list<dvec2> points)
+unique_ptr<Polygon> Polygon::createPolygon(std::initializer_list<fvec2> points)
 {
     return unique_ptr<Polygon>(new Polygon(ConvexType::POLYGON, points));
 }
 
-unique_ptr<Polygon> Polygon::createTriangle(dvec2 point1, dvec2 point2, dvec2 point3)
+unique_ptr<Polygon> Polygon::createTriangle(fvec2 point1, fvec2 point2, fvec2 point3)
 {
     return unique_ptr<Polygon>(new Polygon(ConvexType::TRIANGLE, {point1, point2, point3}));
 }
 
-unique_ptr<Polygon> Polygon::createRectangle(double width, double height)
+unique_ptr<Polygon> Polygon::createRectangle(float width, float height)
 {
     assert(width > 0.0 && height > 0.0);
 
-    dvec2 point1(-width * 0.5, -height *0.5);
-    dvec2 point2(width * 0.5,  -height *0.5);
-    dvec2 point3(width * 0.5,   height *0.5);
-    dvec2 point4(-width * 0.5,  height *0.5);
+    fvec2 point1(-width * 0.5, -height *0.5);
+    fvec2 point2(width * 0.5,  -height *0.5);
+    fvec2 point3(width * 0.5,   height *0.5);
+    fvec2 point4(-width * 0.5,  height *0.5);
 
     return unique_ptr<Polygon>(new Polygon(ConvexType::RECTANGLE, {point1, point2, point3, point4}));
 }
 
-const dvec2& Polygon::getCenter() const
+const fvec2& Polygon::getCenter() const
 {
     return center;
 }
 
-const dvec2 Polygon::getFarthestPoint(const dvec2 direction, const Transform2& transform) const
+const fvec2 Polygon::getFarthestPoint(const fvec2 direction, const Transform2& transform) const
 {
     // transform the normal into local space
-    dvec2 localn = transform.getInverseTransformedR(direction);
+    fvec2 localn = transform.getInverseTransformedR(direction);
 
     // set the farthest point to the first one
-    dvec2 point = vertices[0];
+    fvec2 point = vertices[0];
 
     // prime the projection amount
-    double max = dot(localn, vertices[0]);
+    float max = dot(localn, vertices[0]);
 
     // loop through the rest of the vertices to find a further point along the axis
     size_t size = vertices.size();
     for (int i = 1; i < size; i++)
     {
         // get the current vertex
-        dvec2 v = vertices[i];
+        fvec2 v = vertices[i];
 
         // project the vertex onto the axis
-        double projection = dot(localn, v);
+        float projection = dot(localn, v);
 
         // check to see if the projection is greater than the last
         if (projection > max)
@@ -84,7 +84,7 @@ const dvec2 Polygon::getFarthestPoint(const dvec2 direction, const Transform2& t
     return point;
 }
 
-dvec2 Polygon::calcAreaWeightedCenter(const vector<dvec2>& points)
+fvec2 Polygon::calcAreaWeightedCenter(const vector<fvec2>& points)
 {
     size_t size = points.size();
 
@@ -94,38 +94,38 @@ dvec2 Polygon::calcAreaWeightedCenter(const vector<dvec2>& points)
     // check for list of one point
     if (size == 1)
     {
-        dvec2 p = points[0];
+        fvec2 p = points[0];
         return p;
     }
 
     // get the average center
-    dvec2 ac;
+    fvec2 ac;
     for (int i = 0; i < size; i++)
     {
-        dvec2 p = points[i];
+        fvec2 p = points[i];
         ac += p;
     }
 
     ac *= (1.0 / size);
 
     // otherwise perform the computation
-    dvec2 center;
-    double area = 0.0;
+    fvec2 center;
+    float area = 0.0;
 
     // loop through the vertices
     for (int i = 0; i < size; i++)
     {
         // get two vertices
-        dvec2 p1 = points[i];
-        dvec2 p2 = i + 1 < size ? points[i + 1] : points[0];
+        fvec2 p1 = points[i];
+        fvec2 p2 = i + 1 < size ? points[i + 1] : points[0];
         p1 -= ac;
         p2 -= ac;
 
         // perform the cross product (yi * x(i+1) - y(i+1) * xi)
-        double d = (p1.x * p2.y) - (p1.y * p2.x);
+        float d = (p1.x * p2.y) - (p1.y * p2.x);
 
         // multiply by half
-        double triangleArea = 0.5 * d;
+        float triangleArea = 0.5 * d;
 
         // add it to the total area
         area += triangleArea;
@@ -138,7 +138,7 @@ dvec2 Polygon::calcAreaWeightedCenter(const vector<dvec2>& points)
     }
 
     // check for zero area
-    if (abs(area) <= std::numeric_limits<double>::epsilon())
+    if (abs(area) <= std::numeric_limits<float>::epsilon())
     {
         // zero area can only happen if all the points are the same point
         // in which case just return a copy of the first
@@ -162,13 +162,13 @@ bool Polygon::valid() const
     }
 
     // check for convex
-    double area = 0.0;
-    double sign = 0.0;
+    float area = 0.0;
+    float sign = 0.0;
     for (int i = 0; i < size; i++)
     {
-        dvec2 p0 = (i - 1 < 0) ? vertices[size - 1] : vertices[i - 1];
-        dvec2 p1 = vertices[i];
-        dvec2 p2 = (i + 1 == size) ? vertices[0] : vertices[i + 1];
+        fvec2 p0 = (i - 1 < 0) ? vertices[size - 1] : vertices[i - 1];
+        fvec2 p1 = vertices[i];
+        fvec2 p2 = (i + 1 == size) ? vertices[0] : vertices[i + 1];
 
         // check for coincident vertices
         if (p1 == p2)
@@ -177,12 +177,12 @@ bool Polygon::valid() const
         }
 
         // check the cross product for CCW winding
-        double cross = Vector2Util::cross(p1 - p0, p2 - p1);
-        double tsign = glm::sign(cross);
+        float cross = Vector2Util::cross(p1 - p0, p2 - p1);
+        float tsign = glm::sign(cross);
         area += cross;
 
         // check for co-linear points (for now its allowed)
-        if (abs(cross) > std::numeric_limits<double>::epsilon())
+        if (abs(cross) > std::numeric_limits<float>::epsilon())
         {
             // check for convexity
             if (sign != 0.0 && tsign != sign)

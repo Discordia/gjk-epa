@@ -2,9 +2,10 @@
 
 #include <vector>
 #include <glm/vec2.hpp>
+#include <glm/fwd.hpp>
 
 using std::vector;
-using glm::dvec2;
+using glm::fvec2;
 
 class MinkowskiSum;
 class Penetration;
@@ -21,10 +22,10 @@ public:
     //!
     //!
     //!
-    void findPenetration(const vector<dvec2>& simplex, const MinkowskiSum& minkowskiSum, Penetration& penetration) const;
+    void findPenetration(const vector<fvec2>& simplex, const MinkowskiSum& minkowskiSum, Penetration& penetration) const;
 
 private:
 
     //!
-    const double DISTANCE_EPSILON;
+    const float DISTANCE_EPSILON;
 };

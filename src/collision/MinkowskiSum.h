@@ -15,13 +15,13 @@ public:
     //!
     //! @param direction the search direction
     //! @return the point farthest in the Minkowski sum in the given direction
-    dvec2 getSupportPoint(dvec2 direction) const {
+    fvec2 getSupportPoint(fvec2 direction) const {
         // get the farthest point in the given direction in convex1
-        dvec2 point1 = convex1.getFarthestPoint(direction, transform1);
+        fvec2 point1 = convex1.getFarthestPoint(direction, transform1);
 
         // get the farthest point in the opposite direction in convex2
         direction *= -1.0;
-        dvec2 point2 = convex2.getFarthestPoint(direction, transform2);
+        fvec2 point2 = convex2.getFarthestPoint(direction, transform2);
 
         // return the Minkowski sum point
         return point1 - point2;

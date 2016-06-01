@@ -3,7 +3,7 @@
 #include <glm/vec2.hpp>
 #include <math/Transform2.h>
 
-using glm::dvec2;
+using glm::fvec2;
 
 enum ConvexType
 {
@@ -37,12 +37,12 @@ public:
     //!
     //!
     //!
-    virtual const dvec2& getCenter() const = 0;
+    virtual const fvec2& getCenter() const = 0;
 
     //!
     //!
     //!
-    virtual const dvec2 getFarthestPoint(const dvec2 direction, const Transform2& transform) const = 0;
+    virtual const fvec2 getFarthestPoint(const fvec2 direction, const Transform2& transform) const = 0;
 
 
 private:

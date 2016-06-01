@@ -1,11 +1,12 @@
 #pragma once
 
 #include <glm/vec2.hpp>
+#include <glm/fwd.hpp>
 
-using glm::dvec2;
+using glm::fvec2;
 
 struct Penetration
 {
-    dvec2 normal;
-    double depth;
+    fvec2 normal;
+    float depth;
 };

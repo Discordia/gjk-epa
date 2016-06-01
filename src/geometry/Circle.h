@@ -12,34 +12,34 @@ public:
     //!
     //!
     //!
-    Circle(double radius);
+    Circle(float radius);
 
     //!
     //!
     //!
-    static unique_ptr<Circle> create(double radius);
+    static unique_ptr<Circle> create(float radius);
 
     //!
     //!
     //!
-    const dvec2& getCenter() const;
+    const fvec2& getCenter() const;
 
     //!
     //!
     //!
-    const double getRadius() const;
+    const float getRadius() const;
 
     //!
     //!
     //!
-    const dvec2 getFarthestPoint(const dvec2 direction, const Transform2& transform) const;
+    const fvec2 getFarthestPoint(const fvec2 direction, const Transform2& transform) const;
 
 private:
 
     //!
-    dvec2 center;
+    fvec2 center;
 
     //!
-    double radius;
+    float radius;
 };
 

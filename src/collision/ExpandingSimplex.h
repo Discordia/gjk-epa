@@ -10,7 +10,7 @@
 using std::vector;
 using std::priority_queue;
 using std::shared_ptr;
-using glm::dvec2;
+using glm::fvec2;
 
 class ExpandingSimplex
 {
@@ -19,7 +19,7 @@ public:
     //!
     //!
     //!
-    ExpandingSimplex(const vector<dvec2>& simplex);
+    ExpandingSimplex(const vector<fvec2>& simplex);
 
     //!
     //!
@@ -29,12 +29,12 @@ public:
     //!
     //!
     //!
-    void expand(dvec2 tvec2);
+    void expand(fvec2 tvec2);
 
 private:
 
     //!
-    int32_t calcWinding(const vector<dvec2>& simplex);
+    int32_t calcWinding(const vector<fvec2>& simplex);
 
 private:
 

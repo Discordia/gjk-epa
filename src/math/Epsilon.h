@@ -7,7 +7,7 @@ public:
     //!
     //!
     //!
-    static const double& getEpsilon()
+    static const float& getEpsilon()
     {
         return E;
     }
@@ -15,9 +15,9 @@ public:
     //!
     //!
     //!
-    static const double compute()
+    static const float compute()
     {
-        double e = 0.5;
+        float e = 0.5;
         while (1.0 + e > 1.0)
         {
             e *= 0.5;
@@ -28,5 +28,5 @@ public:
 private:
 
     //!
-    static const double E;
+    static const float E;
 };

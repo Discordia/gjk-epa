@@ -26,9 +26,9 @@ bool GJKCollisionDetector::detect(
                 transform2);
     }
 
-    vector<dvec2> simplex;
+    vector<fvec2> simplex;
     MinkowskiSum minkowskiSum(convex1, transform1, convex2, transform2);
-    dvec2 direction = calcInitialDirection(convex1, transform1, convex2, transform2);
+    fvec2 direction = calcInitialDirection(convex1, transform1, convex2, transform2);
 
     return detect(minkowskiSum, simplex, direction);
 }
@@ -46,9 +46,9 @@ bool GJKCollisionDetector::detect(const Convex& convex1, const Transform2& trans
                 penetration);
     }
 
-    vector<dvec2> simplex;
+    vector<fvec2> simplex;
     MinkowskiSum minkowskiSum(convex1, transform1, convex2, transform2);
-    dvec2 direction = calcInitialDirection(convex1, transform1, convex2, transform2);
+    fvec2 direction = calcInitialDirection(convex1, transform1, convex2, transform2);
 
     if (detect(minkowskiSum, simplex, direction))
     {
@@ -59,24 +59,24 @@ bool GJKCollisionDetector::detect(const Convex& convex1, const Transform2& trans
     return false;
 }
 
-dvec2 GJKCollisionDetector::calcInitialDirection(
+fvec2 GJKCollisionDetector::calcInitialDirection(
         const Convex& convex1,
         const Transform2& transform1,
         const Convex& convex2,
         const Transform2& transform2)
 {
-    dvec2 c1 = transform1.getTransformed(convex1.getCenter());
-    dvec2 c2 = transform2.getTransformed(convex2.getCenter());
+    fvec2 c1 = transform1.getTransformed(convex1.getCenter());
+    fvec2 c2 = transform2.getTransformed(convex2.getCenter());
 
     return c2 - c1;
 }
 
-bool GJKCollisionDetector::detect(const MinkowskiSum& minkowskiSum, vector<dvec2>& simplex, dvec2& direction)
+bool GJKCollisionDetector::detect(const MinkowskiSum& minkowskiSum, vector<fvec2>& simplex, fvec2& direction)
 {
     // check for a zero direction vector
     if (Vector2Util::isZero(direction))
     {
-        direction = dvec2(1.0, 0.0);
+        direction = fvec2(1.0, 0.0);
     }
 
     // add the first point
@@ -96,7 +96,7 @@ bool GJKCollisionDetector::detect(const MinkowskiSum& minkowskiSum, vector<dvec2
         simplex.push_back(minkowskiSum.getSupportPoint(direction));
         
         // make sure that the last point we added was past the origin
-        dvec2 lastPoint = simplex.back();
+        fvec2 lastPoint = simplex.back();
         if (dot(lastPoint, direction) <= 0.0) {
             // a is not past the origin so therefore the shapes do not intersect
             // here we treat the origin on the line as no intersection
@@ -117,30 +117,30 @@ bool GJKCollisionDetector::detect(const MinkowskiSum& minkowskiSum, vector<dvec2
 }
 
 
-bool GJKCollisionDetector::checkSimplex(vector<dvec2>& simplex, dvec2& direction) {
+bool GJKCollisionDetector::checkSimplex(vector<fvec2>& simplex, fvec2& direction) {
     // get the last point added (a)
-    dvec2 a = simplex.back();
+    fvec2 a = simplex.back();
 
     // this is the same as a.to(ORIGIN);
-    dvec2 ao = -a;
+    fvec2 ao = -a;
 
     // check to see what type of simplex we have
     if (simplex.size() == 3)
     {
         // then we have a triangle
-        dvec2 b = simplex[1];
-        dvec2 c = simplex[0];
+        fvec2 b = simplex[1];
+        fvec2 c = simplex[0];
 
         // get the edges
-        dvec2 ab = b - a;
-        dvec2 ac = c - a;
+        fvec2 ab = b - a;
+        fvec2 ac = c - a;
 
         // get the edge normals
-        dvec2 abPerp = Vector2Util::tripleProduct(ac, ab, ab);
-        dvec2 acPerp = Vector2Util::tripleProduct(ab, ac, ac);
+        fvec2 abPerp = Vector2Util::tripleProduct(ac, ab, ab);
+        fvec2 acPerp = Vector2Util::tripleProduct(ab, ac, ac);
 
         // see where the origin is at
-        double acLocation = dot(acPerp, ao);
+        float acLocation = dot(acPerp, ao);
 
         if (acLocation >= 0.0) {
             // the origin lies on the right side of A->C
@@ -155,7 +155,7 @@ bool GJKCollisionDetector::checkSimplex(vector<dvec2>& simplex, dvec2& direction
             // calculating ac's normal using b is more robust
             direction = acPerp;
         } else {
-            double abLocation = dot(abPerp, ao);
+            float abLocation = dot(abPerp, ao);
 
             // the origin lies on the left side of A->C
             if (abLocation < 0.0) {
@@ -176,8 +176,8 @@ bool GJKCollisionDetector::checkSimplex(vector<dvec2>& simplex, dvec2& direction
         }
     } else {
         // get the b point
-        dvec2 b = simplex[0];
-        dvec2 ab = b - a;
+        fvec2 b = simplex[0];
+        fvec2 ab = b - a;
 
         // otherwise we have 2 points (line segment)
         // because of the condition for the gjk loop to continue the origin

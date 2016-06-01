@@ -11,12 +11,12 @@ bool CircleDetector::detect(
         const Circle& circle2,
         const Transform2& transform2)
 {
-    dvec2 ce1 = transform1.getTransformed(circle1.getCenter());
-    dvec2 ce2 = transform2.getTransformed(circle2.getCenter());
+    fvec2 ce1 = transform1.getTransformed(circle1.getCenter());
+    fvec2 ce2 = transform2.getTransformed(circle2.getCenter());
 
-    dvec2 v = ce2 - ce1;
-    double radii = circle1.getRadius() + circle2.getRadius();
-    double mag = glm::length(v);
+    fvec2 v = ce2 - ce1;
+    float radii = circle1.getRadius() + circle2.getRadius();
+    float mag = glm::length(v);
 
     return mag < radii;
 }
@@ -28,12 +28,12 @@ bool CircleDetector::detect(
         const Transform2& transform2,
         Penetration& penetration)
 {
-    dvec2 ce1 = transform1.getTransformed(circle1.getCenter());
-    dvec2 ce2 = transform2.getTransformed(circle2.getCenter());
+    fvec2 ce1 = transform1.getTransformed(circle1.getCenter());
+    fvec2 ce2 = transform2.getTransformed(circle2.getCenter());
 
-    dvec2 v = ce2 - ce1;
-    double radii = circle1.getRadius() + circle2.getRadius();
-    double mag = glm::length(v);
+    fvec2 v = ce2 - ce1;
+    float radii = circle1.getRadius() + circle2.getRadius();
+    float mag = glm::length(v);
 
     if (mag < radii)
     {

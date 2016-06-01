@@ -1,37 +1,35 @@
 #include <geometry/Circle.h>
-
 #include <glm/geometric.hpp>
-#include <cassert>
 
 using glm::normalize;
 
-Circle::Circle(double radius)
+Circle::Circle(float radius)
     : Convex(ConvexType::CIRCLE), radius(radius)
 {
     assert(radius > 0.0);
 }
 
-unique_ptr<Circle> Circle::create(double radius)
+unique_ptr<Circle> Circle::create(float radius)
 {
     return unique_ptr<Circle>(new Circle(radius));
 }
 
-const dvec2& Circle::getCenter() const
+const fvec2& Circle::getCenter() const
 {
     return center;
 }
 
-const double Circle::getRadius() const
+const float Circle::getRadius() const
 {
     return radius;
 }
 
-const dvec2 Circle::getFarthestPoint(const dvec2 direction, const Transform2& transform) const
+const fvec2 Circle::getFarthestPoint(const fvec2 direction, const Transform2& transform) const
 {
-    dvec2 nAxis = normalize(direction);
+    fvec2 nAxis = normalize(direction);
 
     // add the radius along the vector to the transformedCenter to get the farthest point
-    dvec2 transformedCenter = transform.getTransformed(this->center);
+    fvec2 transformedCenter = transform.getTransformed(this->center);
     transformedCenter.x += radius * nAxis.x;
     transformedCenter.y += radius * nAxis.y;
 

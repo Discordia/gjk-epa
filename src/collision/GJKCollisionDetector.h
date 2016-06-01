@@ -37,12 +37,12 @@ private:
     //!
     //!
     //!
-    dvec2 calcInitialDirection(const Convex& convex1, const Transform2& transform1, const Convex& convex2, const Transform2& transform2);
+    fvec2 calcInitialDirection(const Convex& convex1, const Transform2& transform1, const Convex& convex2, const Transform2& transform2);
 
     //!
     //!
     //!
-    bool detect(const MinkowskiSum& minkowskiSum, vector<dvec2>& simplex, dvec2& direction);
+    bool detect(const MinkowskiSum& minkowskiSum, vector<fvec2>& simplex, fvec2& direction);
 
     //! Determines whether the given simplex contains the origin.  If it does contain the origin,
     //! then this method will return true.  If it does not, this method will update both the given
@@ -55,7 +55,7 @@ private:
     //! @param simplex the simplex
     //! @param direction the search direction
     //! @return boolean true if the simplex contains the origin
-    bool checkSimplex(vector<dvec2>& simplex, dvec2& direction);
+    bool checkSimplex(vector<fvec2>& simplex, fvec2& direction);
 
 private:
 

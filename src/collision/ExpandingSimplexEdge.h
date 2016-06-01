@@ -9,9 +9,9 @@ class ExpandingSimplexEdge
 {
 public:
 
-    ExpandingSimplexEdge(const dvec2 point1, const dvec2 point2, const int32_t winding)
+    ExpandingSimplexEdge(const fvec2 point1, const fvec2 point2, const int32_t winding)
     {
-        this->normal = dvec2(point2.x - point1.x, point2.y - point1.y);
+        this->normal = fvec2(point2.x - point1.x, point2.y - point1.y);
 
         if (winding < 0) {
             this->normal = Vector2Util::right(normal);
@@ -29,22 +29,22 @@ public:
         this->point2 = point2;
     }
 
-    const dvec2& getPoint1() const
+    const fvec2& getPoint1() const
     {
         return point1;
     }
 
-    const dvec2& getPoint2() const
+    const fvec2& getPoint2() const
     {
         return point2;
     }
 
-    const double getDistance() const
+    const float getDistance() const
     {
         return distance;
     }
 
-    const dvec2& getNormal() const
+    const fvec2& getNormal() const
     {
         return normal;
     }
@@ -53,16 +53,16 @@ public:
 private:
 
     //!
-    dvec2 point1;
+    fvec2 point1;
 
     //!
-    dvec2 point2;
+    fvec2 point2;
 
     //!
-    dvec2 normal;
+    fvec2 normal;
 
     //!
-    double distance;
+    float distance;
 };
 
 struct DistancePredicate

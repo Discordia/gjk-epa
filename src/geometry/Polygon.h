@@ -17,32 +17,32 @@ public:
     //!
     //!
     //!
-    Polygon(const ConvexType convexType, std::initializer_list<dvec2> points);
+    Polygon(const ConvexType convexType, std::initializer_list<fvec2> points);
 
     //!
     //!
     //!
-    static unique_ptr<Polygon> createPolygon(std::initializer_list<dvec2> points);
+    static unique_ptr<Polygon> createPolygon(std::initializer_list<fvec2> points);
 
     //!
     //!
     //!
-    static unique_ptr<Polygon> createTriangle(dvec2 point1, dvec2 point2, dvec2 point3);
+    static unique_ptr<Polygon> createTriangle(fvec2 point1, fvec2 point2, fvec2 point3);
 
     //!
     //! Constructs a Rectangle with width and height centered around origin
     //!
-    static unique_ptr<Polygon> createRectangle(double width, double height);
+    static unique_ptr<Polygon> createRectangle(float width, float height);
 
     //!
     //!
     //!
-    const dvec2& getCenter() const;
+    const fvec2& getCenter() const;
 
     //!
     //!
     //!
-    const dvec2 getFarthestPoint(const dvec2 direction, const Transform2& transform) const;
+    const fvec2 getFarthestPoint(const fvec2 direction, const Transform2& transform) const;
 
 private:
 
@@ -54,15 +54,15 @@ private:
     //!
     //!
     //!
-    dvec2 calcAreaWeightedCenter(const vector<dvec2>& points);
+    fvec2 calcAreaWeightedCenter(const vector<fvec2>& points);
 
 private:
 
     //!
-    vector<dvec2> vertices;
+    vector<fvec2> vertices;
 
     //!
-    dvec2 center;
+    fvec2 center;
 
 };
 
