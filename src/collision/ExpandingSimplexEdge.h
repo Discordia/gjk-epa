@@ -54,9 +54,9 @@ public:
     string to_string()
     {
         return "ExpandingSimplexEdge - point1: " + glm::to_string(point1) +
-                                       ", point2: " + glm::to_string(point2) +
-                                        ", normal: " + glm::to_string(normal) +
-                                         ", distance: " + std::to_string(distance);
+               ", point2: " + glm::to_string(point2) +
+               ", normal: " + glm::to_string(normal) +
+               ", distance: " + std::to_string(distance);
     }
 
 
