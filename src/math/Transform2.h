@@ -2,9 +2,14 @@
 
 #include <glm/vec2.hpp>
 #include <glm/mat2x2.hpp>
+#include <glm/fwd.hpp>
+#include <glm/gtx/string_cast.hpp>
+#include <cmath>
+#include <string>
 
 using glm::fvec2;
 using glm::fmat2x2;
+using std::string;
 
 class Transform2
 {
@@ -87,6 +92,20 @@ public:
     }
 
     //!
+    //! Rotate the rotation matrix to an absolute angle
+    //!
+    void rotateR(float angle)
+    {
+        float cosa = cosf(angle);
+        float sina = sinf(angle);
+
+        rotation[0][0] = cosa;
+        rotation[0][1] = -sina;
+        rotation[1][0] = sina;
+        rotation[1][1] = cosa;
+    }
+
+    //!
     //!
     //!
     void toArray(float* m16) const
@@ -107,6 +126,13 @@ public:
         m16[13] = translation.y;
         m16[14] = 0;
         m16[15] = 1;
+    }
+
+    const string toString() const
+    {
+        return "Transform2 translation=" + glm::to_string(this->translation) +
+               ", scale=" + glm::to_string(this->scaleV) +
+               ", rotation=" + glm::to_string(this->rotation);
     }
 
 private:

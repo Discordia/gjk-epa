@@ -12,6 +12,11 @@ class Vector2Util
 {
 public:
 
+    static float findAngle(const fvec2& v1, const fvec2& v2)
+    {
+        return atan2f(v2.y, v2.x) - atan2f(v1.y, v1.x);
+    }
+
     static float cross(const fvec2& p1, const fvec2& p2)
     {
         return p1.x * p2.y - p1.y * p2.x;

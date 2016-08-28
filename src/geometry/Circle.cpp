@@ -36,7 +36,7 @@ const fvec2 Circle::getFarthestPoint(const fvec2 direction, const Transform2& tr
     return transformedCenter;
 }
 
-
-
-
-
+const string Circle::toString() const
+{
+    return "Circle - center=" + glm::to_string(this->center) + ", radius=" + std::to_string(this->radius);
+}

@@ -2,8 +2,10 @@
 
 #include <math/Vector2Util.h>
 #include <memory>
+#include <glm/gtx/string_cast.hpp>
 
 using std::shared_ptr;
+using std::string;
 
 class ExpandingSimplexEdge
 {
@@ -47,6 +49,14 @@ public:
     const fvec2& getNormal() const
     {
         return normal;
+    }
+
+    string to_string()
+    {
+        return "ExpandingSimplexEdge - point1: " + glm::to_string(point1) +
+                                       ", point2: " + glm::to_string(point2) +
+                                        ", normal: " + glm::to_string(normal) +
+                                         ", distance: " + std::to_string(distance);
     }
 
 

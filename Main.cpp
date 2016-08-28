@@ -3,6 +3,7 @@
 #include <collision/GJKCollisionDetector.h>
 #include <geometry/Circle.h>
 #include <geometry/Polygon.h>
+#include <math/Vector2Util.h>
 
 using std::cout;
 using std::endl;
@@ -69,5 +70,28 @@ int main()
     cout << ", penetration normal: (" << penetrationCC.normal.x << "," << penetrationCC.normal.y << ")";
     cout << ", penetration depth: " << penetrationCC.depth << endl;
 
+
+    // Trying to find a bug
+    unique_ptr<Polygon> rectangleStatic = Polygon::createRectangle(0.666667f, 29.666668f);
+    Transform2 staticTransform;
+    staticTransform.translate(0.433333f, 15.000001f);
+
+    unique_ptr<Polygon> rectangleDynamic = Polygon::createRectangle(0.33333333333f, 0.666666666f);
+    Transform2 dynamicTransform;
+    // dynamicTransform.translate(1.083334f, 6.666667f);
+    dynamicTransform.translate(1.102533f, 9.730800f);
+
+    float angle = Vector2Util::findAngle(fvec2(-1.0f, 1.0f), fvec2(0.0f, 1.0f));
+    dynamicTransform.rotateR(angle);
+
+    cout << "static body: " + rectangleStatic->toString() + " transform: " + staticTransform.toString() +
+            ", dynamicBody: " + rectangleDynamic->toString() + " transform: " + dynamicTransform.toString() << endl;
+
+    Penetration penetrationSD;
+    bool collisionSD = collisionDetector.detect(*rectangleStatic, staticTransform, *rectangleDynamic, dynamicTransform, penetrationSD);
+    cout << "Do we have a collision between static and dynamic: " << collisionSD;
+    cout << ", penetration normal: (" << penetrationSD.normal.x << "," << penetrationSD.normal.y << ")";
+    cout << ", penetration depth: " << penetrationSD.depth << endl;
+    
     return 0;
 }

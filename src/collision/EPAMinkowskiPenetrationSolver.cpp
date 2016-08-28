@@ -2,14 +2,12 @@
 #include <collision/ExpandingSimplex.h>
 #include <collision/MinkowskiSum.h>
 #include <collision/Penetration.h>
-#include <math/Epsilon.h>
 
 using std::unique_ptr;
 
 const int MAX_ITERATIONS = 100;
 
 EPAMinkowskiPenetrationSolver::EPAMinkowskiPenetrationSolver()
-    : DISTANCE_EPSILON(sqrtf(Epsilon::getEpsilon()))
 {
 }
 
@@ -28,7 +26,7 @@ void EPAMinkowskiPenetrationSolver::findPenetration(
         point = minkowskiSum.getSupportPoint(edge->getNormal());
 
         float projection = glm::dot(point, edge->getNormal());
-        if ((projection - edge->getDistance()) < DISTANCE_EPSILON)
+        if ((projection - edge->getDistance()) < std::numeric_limits<float>::epsilon())
         {
             penetration.normal = edge->getNormal();
             penetration.depth = projection;

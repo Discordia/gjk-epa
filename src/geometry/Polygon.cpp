@@ -19,6 +19,16 @@ Polygon::Polygon(const ConvexType convextType, std::initializer_list<fvec2> poin
     center = calcAreaWeightedCenter(vertices);
 }
 
+Polygon::Polygon(const ConvexType convexType, fvec2 center, std::initializer_list<fvec2> points)
+    : Convex(convexType)
+{
+    vertices.insert(vertices.end(), points.begin(), points.end());
+
+    assert(valid());
+
+    this->center = center;
+}
+
 unique_ptr<Polygon> Polygon::createPolygon(std::initializer_list<fvec2> points)
 {
     return unique_ptr<Polygon>(new Polygon(ConvexType::POLYGON, points));
@@ -38,7 +48,7 @@ unique_ptr<Polygon> Polygon::createRectangle(float width, float height)
     fvec2 point3(width * 0.5,   height *0.5);
     fvec2 point4(-width * 0.5,  height *0.5);
 
-    return unique_ptr<Polygon>(new Polygon(ConvexType::RECTANGLE, {point1, point2, point3, point4}));
+    return unique_ptr<Polygon>(new Polygon(ConvexType::RECTANGLE, fvec2(), {point1, point2, point3, point4}));
 }
 
 const fvec2& Polygon::getCenter() const
@@ -198,5 +208,25 @@ bool Polygon::valid() const
     return area >= 0.0;
 }
 
+const string Polygon::toString() const
+{
+    string verticesS = "[";
+    for (auto&& vertex : this->vertices)
+    {
+        verticesS += glm::to_string(vertex);
+    }
+    verticesS += "]";
 
+    string polygonType = "RECTANLE";
+    if (this->getType() == ConvexType::TRIANGLE)
+    {
+        polygonType = "TRIANGLE";
+    }
+    else if (this->getType() == ConvexType::POLYGON)
+    {
+        polygonType = "POLYGON";
+    }
+
+    return "Polygon [" + polygonType + "] - verticies=" + verticesS + ", center=" + glm::to_string(center);
+}
 
