@@ -23,9 +23,4 @@ public:
     //!
     //!
     void findPenetration(const vector<fvec2>& simplex, const MinkowskiSum& minkowskiSum, Penetration& penetration) const;
-
-private:
-
-    //!
-    const float DISTANCE_EPSILON;
 };
