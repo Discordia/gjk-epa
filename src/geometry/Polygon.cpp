@@ -69,7 +69,7 @@ const fvec2 Polygon::getFarthestPoint(const fvec2 direction, const Transform2& t
 
     // loop through the rest of the vertices to find a further point along the axis
     size_t size = vertices.size();
-    for (int i = 1; i < size; i++)
+    for (uint32_t i = 1; i < size; i++)
     {
         // get the current vertex
         fvec2 v = vertices[i];
@@ -110,7 +110,7 @@ fvec2 Polygon::calcAreaWeightedCenter(const vector<fvec2>& points)
 
     // get the average center
     fvec2 ac;
-    for (int i = 0; i < size; i++)
+    for (uint32_t i = 0; i < size; i++)
     {
         fvec2 p = points[i];
         ac += p;
@@ -123,7 +123,7 @@ fvec2 Polygon::calcAreaWeightedCenter(const vector<fvec2>& points)
     float area = 0.0;
 
     // loop through the vertices
-    for (int i = 0; i < size; i++)
+    for (uint32_t i = 0; i < size; i++)
     {
         // get two vertices
         fvec2 p1 = points[i];
@@ -165,7 +165,7 @@ fvec2 Polygon::calcAreaWeightedCenter(const vector<fvec2>& points)
 
 bool Polygon::valid() const
 {
-    size_t size = vertices.size();
+    int32_t size = (int32_t) vertices.size();
     if (size < 3)
     {
         return false;
@@ -174,7 +174,7 @@ bool Polygon::valid() const
     // check for convex
     float area = 0.0;
     float sign = 0.0;
-    for (int i = 0; i < size; i++)
+    for (int32_t i = 0; i < size; i++)
     {
         fvec2 p0 = (i - 1 < 0) ? vertices[size - 1] : vertices[i - 1];
         fvec2 p1 = vertices[i];

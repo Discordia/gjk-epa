@@ -5,7 +5,7 @@ ExpandingSimplex::ExpandingSimplex(const vector<fvec2>& simplex)
     this->winding = calcWinding(simplex);
 
     size_t size = simplex.size();
-    for (int i = 0; i < size; i++) {
+    for (uint32_t i = 0; i < size; i++) {
         int j = i + 1 == size ? 0 : i + 1;
 
         // create the edge
@@ -38,7 +38,7 @@ void ExpandingSimplex::expand(fvec2 point)
 int32_t ExpandingSimplex::calcWinding(const vector<fvec2>& simplex)
 {
     size_t size = simplex.size();
-    for (int i = 0; i < size; i++)
+    for (uint32_t i = 0; i < size; i++)
     {
         int j = i + 1 == size ? 0 : i + 1;
 
